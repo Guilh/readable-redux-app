@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 import { apiRoot } from "../config";
 import { postsActionTypes } from '../actionTypes';
 
@@ -11,7 +11,7 @@ export function requestPostList() {
 export function requestPostListSuccess(data) {
   return {
     type: postsActionTypes.REQUEST_POST_LIST_SUCCESS,
-    courses: data
+    posts: data
   };
 
 }
@@ -26,11 +26,15 @@ export function requestPostListFailure(err) {
 export function fetchPostList() {
   return dispatch => {
     dispatch(requestPostList())
-    return fetch(`${apiRoot}/categories`, {
-      headers: { 'Authorization': 'whatever-you-want' }
+    return fetch(`${apiRoot}/posts`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'guil',
+        'Content-Type': "application/json"
+      }
     })
     .then(response => response.json())
-    .then(({ data }) => dispatch(requestPostListSuccess(data)))
+    .then( data => dispatch(requestPostListSuccess(data)))
     .catch(err => dispatch(requestPostListFailure(err)));
   };
 }

@@ -30,10 +30,13 @@ export function fetchPost(id) {
   return dispatch => {
     dispatch(requestPost());
     return fetch(`${apiRoot}/posts/${id}`, {
-      headers: { 'Authorization': 'whatever-you-want' }
+      headers: {
+        'Authorization': 'guil',
+        'Content-Type': "application/json"
+      }
     })
       .then(response => response.json())
-      .then(({ data }) => dispatch(requestPostSuccess(data[0])))
+      .then(data => dispatch(requestPostSuccess(data[0])))
       .catch(err => dispatch(requestPostFailure(err)));
   };
 }
