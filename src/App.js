@@ -4,22 +4,25 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import Header from './components/Header';
 import Posts from './containers/Posts';
 
+import store from "./store";
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <Provider store={store}>
         <BrowserRouter>
-          <div>
+          <div className="App">
             <Header />
 
             <Route exact path="/" component={Posts} />
           </div>
         </BrowserRouter>
-      </div>
+      </Provider>
     );
   }
 }
