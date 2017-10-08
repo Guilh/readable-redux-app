@@ -3,7 +3,7 @@ import { apiRoot } from "../config";
 import { postActionTypes } from "../actionTypes";
 
 /*
-* GET /api/courses/:id
+* GET /api/posts/:id
 */
 
 export function requestPost() {
@@ -30,13 +30,14 @@ export function fetchPost(id) {
   return dispatch => {
     dispatch(requestPost());
     return fetch(`${apiRoot}/posts/${id}`, {
+      method: 'GET',
       headers: {
         'Authorization': 'guil',
         'Content-Type': "application/json"
       }
     })
       .then(response => response.json())
-      .then(data => dispatch(requestPostSuccess(data[0])))
+      .then(data => dispatch(requestPostSuccess(data)))
       .catch(err => dispatch(requestPostFailure(err)));
   };
 }

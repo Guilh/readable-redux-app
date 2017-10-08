@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  NavLink
 } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import Header from './components/Header';
 import Posts from './containers/Posts';
+import CreatePost from './containers/CreatePost';
+import PostDetail from './containers/PostDetail';
 
 import store from "./store";
 
@@ -18,8 +21,12 @@ class App extends Component {
         <BrowserRouter>
           <div className="App">
             <Header />
-
+            <NavLink className="course--link" to="/create-post">
+              Create Post
+            </NavLink>
             <Route exact path="/" component={Posts} />
+            <Route exact path="/posts/:id" component={PostDetail} />
+            <Route path="/create-post" component={CreatePost} />
           </div>
         </BrowserRouter>
       </Provider>

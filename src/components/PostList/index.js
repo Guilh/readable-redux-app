@@ -17,10 +17,11 @@ class PostList extends Component {
   }
 
   render() {
-    console.log(this.props.posts)
     return (
       <div className="bounds">
-        <PostCard />
+        {this.props.posts.map(post =>
+          <PostCard  key={post.id} post={post} />
+        )}
       </div>
     );
   }

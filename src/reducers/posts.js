@@ -1,6 +1,6 @@
 import { postsActionTypes } from "../actionTypes";
 
-export default (state = {}, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case postsActionTypes.REQUEST_POST_LIST:
       return state;
