@@ -14,7 +14,6 @@ class PostDetail extends Component {
     });
   }
 
-
   render() {
     console.log(this.props.post)
     return (
