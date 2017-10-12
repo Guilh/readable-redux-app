@@ -1,9 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => (
   <div className="header">
     <div className="bounds">
-      <h1 className="header--logo">Test test</h1>
+
+      <NavLink className="header--logo" to="/">Test test</NavLink>
     </div>
   </div>
 );

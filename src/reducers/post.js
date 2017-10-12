@@ -23,7 +23,7 @@ export default (state = defaultState, action) => {
     case postActionTypes.CREATE_POST:
       return state;
     case postActionTypes.CREATE_POST_SUCCESS:
-      return action.course;
+      return action.post;
     case postActionTypes.CREATE_POST_FAILURE:
       return state;
 

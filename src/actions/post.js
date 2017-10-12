@@ -72,7 +72,8 @@ export function sendCreatePost(post) {
   return dispatch => {
     dispatch(createPost());
     return fetch(`${apiRoot}/posts`, {
-      method: "post",
+      method: "POST",
+      body: JSON.stringify(post),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'guil',

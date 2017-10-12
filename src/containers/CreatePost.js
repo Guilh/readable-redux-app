@@ -6,7 +6,12 @@ import { postActions } from "../actions";
 class CreatePost extends Component {
 
   state = {
-    steps: [{ title: "", description: "", body: "" }]
+      title: "",
+      author: "",
+      category: "",
+      body: "",
+      id: Date.now().toString(),
+      timestamp: Date.now()
   };
 
   changeHandler(formField, value) {
@@ -19,7 +24,7 @@ class CreatePost extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    this.props.onSubmit(this.state, this.props.auth);
+    this.props.onSubmit(this.state);
   }
 
   render() {
@@ -52,10 +57,15 @@ class CreatePost extends Component {
               />
 
               <label className="course--label">Category</label>
-              <select className="input-title">
-                <option>React</option>
-                <option>Redux</option>
-                <option>Udacity</option>
+              <select className="input-title"
+                onChange={e => {
+                  this.changeHandler("category", e.target.value);
+                }}
+                value={this.state.category}>
+                <option>-- select --</option>
+                <option value="react">React</option>
+                <option value="redux">Redux</option>
+                <option value="udacity">Udacity</option>
               </select><br />
 
               <label className="course--label">Body</label>
@@ -80,12 +90,9 @@ class CreatePost extends Component {
   }
 }
 
-const mapStateToProps = state => ({ auth: state.auth });
-
 const mapDispatchToProps = dispatch => ({
-  onMount: id => dispatch(postActions.fetchPost(id)),
   onSubmit: (post) =>
     dispatch(postActions.sendCreatePost(post))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
+export default connect(null, mapDispatchToProps)(CreatePost);
