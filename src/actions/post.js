@@ -2,7 +2,7 @@ import fetch from "isomorphic-fetch";
 import { apiRoot } from "../config";
 import { checkForErrors, dispatchValidationError } from "./util";
 import { postActionTypes } from "../actionTypes";
-import { redirectActions } from '../actions';
+import { fetchPostList } from "./posts";
 
 /*
 * GET /posts/:id
@@ -79,8 +79,44 @@ export function sendCreatePost(post) {
         'Authorization': 'guil',
       }
     })
-      .then(checkForErrors)
-      .then(() => dispatch(redirectActions.redirectTo(`/`)))
-      .catch(dispatchValidationError(dispatch));
+  };
+}
+
+/*
+* DELETE /posts/:id
+*/
+
+export function deletePost() {
+  return {
+    type: postActionTypes.DELETE_POST
+  };
+}
+
+export function deletePostSuccess(data) {
+  return {
+    type: postActionTypes.DELETE_POST_SUCCESS,
+    post: data
+  };
+}
+
+export function deletePostFailure(err) {
+  return {
+    type: postActionTypes.DELETE_POST_FAILURE,
+    err: err
+  };
+}
+
+export function sendDeletePost(id) {
+  return dispatch => {
+    dispatch(deletePost());
+    return fetch(`${apiRoot}/posts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'guil',
+        'Content-Type': "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(() => dispatch(fetchPostList()))
   };
 }

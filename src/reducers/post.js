@@ -27,6 +27,13 @@ export default (state = defaultState, action) => {
     case postActionTypes.CREATE_POST_FAILURE:
       return state;
 
+    case postActionTypes.DELETE_POST:
+      return state;
+    case postActionTypes.DELETE_POST_SUCCESS:
+      return action.post;
+    case postActionTypes.DELETE_POST_FAILURE:
+      return state;
+
     // case courseActionTypes.EDIT_COURSE:
     //   return state;
     // case courseActionTypes.EDIT_COURSE_SUCCESS:
