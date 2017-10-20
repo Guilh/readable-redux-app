@@ -38,3 +38,29 @@ export function fetchPostList() {
     .catch(err => dispatch(requestPostListFailure(err)));
   };
 }
+
+/*
+* GET /:category/posts
+*/
+
+export function requestCategoryList() {
+  return {
+    type: postsActionTypes.REQUEST_POST_CATEGORY
+  };
+}
+
+export function fetchPostCategory(category) {
+  return dispatch => {
+    dispatch(requestCategoryList())
+    return fetch(`${apiRoot}/${category}/posts`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'guil',
+        'Content-Type': "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then( data => dispatch(requestPostListSuccess(data)))
+    .catch(err => dispatch(requestPostListFailure(err)));
+  };
+}

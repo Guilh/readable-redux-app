@@ -24,7 +24,7 @@ class App extends Component {
             <NavLink className="course--link" to="/create-post">
               Create Post
             </NavLink>
-            <Route exact path="/" component={Posts} />
+            <Route exact path="/" component={Posts} />  
             <Route exact path="/posts/:id" component={PostDetail} />
             <Route path="/create-post" component={CreatePost} />
           </div>
