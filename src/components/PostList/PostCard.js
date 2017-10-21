@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { connect } from "react-redux";
 import { postActions } from "../../actions";
 
+import moment from 'moment';
+
 class PostCard extends Component {
 
   onSubmit() {
@@ -20,7 +22,7 @@ class PostCard extends Component {
             <p className="course--title">{this.props.post.body}</p>
             <span className="course--label">{this.props.post.category}</span>
           <a className="button" onClick={this.onSubmit.bind(this)}>x delete</a>
-          {console.log(this.props.post.id)}
+          <p>{ moment(this.props.timestamp).format('M/D/YY h:mma') }</p>
         </div>
       </div>
     );

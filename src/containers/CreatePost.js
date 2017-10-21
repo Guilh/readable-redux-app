@@ -10,8 +10,8 @@ class CreatePost extends Component {
       author: "",
       category: "",
       body: "",
-      id: Date.now().toString(),
-      timestamp: Date.now()
+      id: new Date().toString(),
+      timestamp: new Date()
   };
 
   changeHandler(formField, value) {

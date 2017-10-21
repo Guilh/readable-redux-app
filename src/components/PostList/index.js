@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -19,11 +20,23 @@ class PostList extends Component {
   render() {
     return (
       <div className="bounds">
-        <nav>
-          <span onClick={() => this.onFilter('react')}>React</span>
-          <span onClick={() => this.onFilter('redux')}>Redux</span>
-          <span onClick={() => this.onFilter('udacity')}>Udacity</span>
-        </nav>
+        <div className="actions--bar">
+          <div className="bounds">
+            <div className="grid-100 flex">
+              <NavLink className="button" to="/create-post">
+                Create Post
+              </NavLink>
+              <nav className="category--nav">
+                Categories:
+                <span onClick={() => this.onFilter('react')}>React</span>
+                <span onClick={() => this.onFilter('redux')}>Redux</span>
+                <span onClick={() => this.onFilter('udacity')}>Udacity</span>
+                <span onClick={() => this.componentDidMount()}>All</span>
+              </nav>
+            </div>
+          </div>
+        </div>
+
 
         {this.props.posts.map(post =>
           <PostCard key={post.id} post={post} />
