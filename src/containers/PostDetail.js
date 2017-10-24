@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { postActions } from "../actions";
 
+import Comments from '../components/Comments';
+
 class PostDetail extends Component {
 
   componentDidMount() {
@@ -35,6 +37,8 @@ class PostDetail extends Component {
             <div className="course--description">
               <p>{this.props.post.body}</p>
             </div>
+            <h2>Comments</h2>
+            <Comments />
           </div>
         </div>
       </div>
