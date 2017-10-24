@@ -23,6 +23,7 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={Posts} />
             <Route exact path="/posts/:id" component={PostDetail} />
+          
             <Route path="/create-post" component={CreatePost} />
           </div>
         </BrowserRouter>

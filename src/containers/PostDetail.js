@@ -2,22 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { postActions } from "../actions";
+import { commentsActions } from '../actions';
 
 import Comments from '../components/Comments';
 
 class PostDetail extends Component {
 
   componentDidMount() {
-    this.props.onMount(this.props.match.params.id).then(({ post }) => {
-      this.setState({
-        ...this.state,
-        ...post
-      });
-    });
+    this.props.onMount(this.props.match.params.id);
+    this.props.displayComments(this.props.match.params.id);
   }
 
   render() {
-    console.log(this.props.post)
+
+    console.log(this.props.comments);
     return (
       <div>
         <div className="bounds course--detail">
@@ -38,7 +36,7 @@ class PostDetail extends Component {
               <p>{this.props.post.body}</p>
             </div>
             <h2>Comments</h2>
-            <Comments />
+            <Comments comments={this.props.comments} />
           </div>
         </div>
       </div>
@@ -46,10 +44,11 @@ class PostDetail extends Component {
   }
 }
 
-const mapStateToProps = state => ({ post: state.post });
+const mapStateToProps = state => ({ post: state.post, comments: state.comments, id: state.post.id });
 
 const mapDispatchToProps = dispatch => ({
-  onMount: id => dispatch(postActions.fetchPost(id))
+  onMount: id => dispatch(postActions.fetchPost(id)),
+  displayComments: id => dispatch(commentsActions.fetchCommentList(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
